@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://0pcog78i7oqo"]
+
+[ext_resource type="PackedScene" uid="uid://dmfha7cccibdm" path="res://Scenes/player.tscn" id="1_8tj53"]
+
+[node name="player_scene" type="Node2D"]
+position = Vector2(5, 3)
+
+[node name="player" parent="." instance=ExtResource("1_8tj53")]
+position = Vector2(224, -73)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(572, 319)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0

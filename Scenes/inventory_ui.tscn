@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1fig0jikqoiv"]
+
+[ext_resource type="Script" uid="uid://6kgocq6rkm7h" path="res://inventory_ui.gd" id="1_8su62"]
+
+[node name="inventory_UI" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_8su62")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 1149.0
+offset_bottom = 644.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 12.0
+offset_right = 103.0
+offset_bottom = 52.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="Panel/VBoxContainer"]
+layout_mode = 2

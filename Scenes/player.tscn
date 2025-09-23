@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://dmfha7cccibdm"]
+
+[ext_resource type="Script" uid="uid://cxyuff3p5hcuf" path="res://Scenes/player_movement.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://sxkjt3rlget6" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/player_spritesheet.png" id="1_v0iea"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(0, 0, 833, 833)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0iea"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(833, 0, 833, 833)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(1666, 0, 833, 833)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6t5aa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvnsp")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0iea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t5aa")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vgqql"]
+radius = 10.4403
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
+radius = 11.4018
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(505, -67)
+motion_mode = 1
+script = ExtResource("1_cvnsp")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(354.5, 393.25)
+scale = Vector2(0.0708283, 0.0558223)
+sprite_frames = SubResource("SpriteFrames_6t5aa")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="collision2D" type="CollisionShape2D" parent="."]
+position = Vector2(356, 380)
+shape = SubResource("CircleShape2D_vgqql")
+
+[node name="Interact" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+position = Vector2(357, 398)
+shape = SubResource("CircleShape2D_cvnsp")
+one_way_collision_margin = 0.0
