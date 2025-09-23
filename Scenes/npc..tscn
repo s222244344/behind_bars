@@ -43,7 +43,7 @@ radius = 10.4403
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 11.4018
 
-[node name="player" type="CharacterBody2D" groups=["player"]]
+[node name="player" type="CharacterBody2D" groups=["npc"]]
 position = Vector2(505, -67)
 motion_mode = 1
 script = ExtResource("1_lqphq")

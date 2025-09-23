@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://bhjycrjxid38r"]
+[gd_scene load_steps=43 format=4 uid="uid://bhjycrjxid38r"]
 
 [ext_resource type="Texture2D" uid="uid://sk45hqiiry4r" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/tileset_32x32.png" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://0pcog78i7oqo" path="res://Scenes/player_scene.tscn" id="2_bo1nx"]
@@ -7,16 +7,8 @@
 [ext_resource type="Script" uid="uid://c5x5p7j4dl3xt" path="res://Scenes/door.gd" id="5_h1bgf"]
 [ext_resource type="Texture2D" uid="uid://c1b47dr0sfyoo" path="res://Free 2D Prison Game Assets By Adarsh S/bed.png" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://d1fig0jikqoiv" path="res://Scenes/inventory_ui.tscn" id="6_21xkr"]
-[ext_resource type="Texture2D" uid="uid://kqvw6dri0r7r" path="res://Free 2D Prison Game Assets By Adarsh S/keygreen.png" id="7_344ge"]
-[ext_resource type="Script" uid="uid://cexwwbsr7qink" path="res://Scenes/key2.gd" id="7_fdnlq"]
-[ext_resource type="Texture2D" uid="uid://d3fsnmx27dg3j" path="res://Free 2D Prison Game Assets By Adarsh S/keyred.png" id="8_ynf5e"]
-[ext_resource type="Texture2D" uid="uid://duiliv672o27u" path="res://Free 2D Prison Game Assets By Adarsh S/doorgreen.png" id="9_hptm8"]
-[ext_resource type="Script" uid="uid://8uai7x2pt3a2" path="res://Scenes/key3.gd" id="9_jkdf5"]
-[ext_resource type="Texture2D" uid="uid://jy556u57d4ju" path="res://Free 2D Prison Game Assets By Adarsh S/doorred.png" id="10_d1ilt"]
-[ext_resource type="Script" uid="uid://c0cqu416xbot5" path="res://Scenes/door2.gd" id="11_wsu2k"]
 [ext_resource type="PackedScene" uid="uid://cpqmtybov766s" path="res://Scenes/npc..tscn" id="12_fdnlq"]
 [ext_resource type="Script" uid="uid://c5osekphsfdvk" path="res://scripts/npc..gd" id="13_fdnlq"]
-[ext_resource type="Script" uid="uid://df7o1acn51af4" path="res://Scenes/door3.gd" id="13_k12tt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -125,6 +117,9 @@ size = Vector2(32.5, 100.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hpc6h"]
 size = Vector2(32.5, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neg2b"]
+size = Vector2(60, 29)
 
 [node name="game_scene" type="Node2D"]
 
@@ -276,6 +271,16 @@ position = Vector2(-5, -6)
 [node name="Door" parent="." instance=ExtResource("4_jjvhh")]
 script = ExtResource("5_h1bgf")
 
+[node name="CollisionShape2D" parent="Door/StaticBody2D" index="0"]
+position = Vector2(550, 222)
+
+[node name="CollisionShape2D" parent="Door/Area2D" index="0"]
+position = Vector2(548, 223.5)
+shape = SubResource("RectangleShape2D_neg2b")
+
+[node name="Sprite2D" parent="Door" index="2"]
+position = Vector2(551, 223)
+
 [node name="bed1" type="Sprite2D" parent="."]
 position = Vector2(849, 597)
 scale = Vector2(0.04, 0.04)
@@ -333,73 +338,6 @@ texture = ExtResource("5_kry3j")
 
 [node name="inventory_UI" parent="." instance=ExtResource("6_21xkr")]
 
-[node name="key2" parent="." instance=ExtResource("3_8gbba")]
-script = ExtResource("7_fdnlq")
-key_id = "key_green"
-
-[node name="Sprite2D" parent="key2" index="0"]
-position = Vector2(302.515, 382.702)
-scale = Vector2(0.0301919, 0.028007)
-texture = ExtResource("7_344ge")
-
-[node name="CollisionShape2D" parent="key2" index="1"]
-position = Vector2(303.029, 383.404)
-
-[node name="key3" parent="." instance=ExtResource("3_8gbba")]
-script = ExtResource("9_jkdf5")
-key_id = "key_red"
-
-[node name="Sprite2D" parent="key3" index="0"]
-position = Vector2(143.898, 19.3365)
-texture = ExtResource("8_ynf5e")
-
-[node name="CollisionShape2D" parent="key3" index="1"]
-position = Vector2(143.898, 19.3365)
-
-[node name="Door2" parent="." instance=ExtResource("4_jjvhh")]
-script = ExtResource("11_wsu2k")
-required_key_id = "key_green"
-
-[node name="StaticBody2D" parent="Door2" index="0"]
-position = Vector2(0, 1)
-
-[node name="CollisionShape2D" parent="Door2/StaticBody2D" index="0"]
-position = Vector2(298, 318.5)
-
-[node name="Area2D" parent="Door2" index="1"]
-position = Vector2(296, 311)
-
-[node name="CollisionShape2D" parent="Door2/Area2D" index="0"]
-position = Vector2(-1, -6)
-
-[node name="Sprite2D" parent="Door2" index="2"]
-position = Vector2(297, 318)
-rotation = -3.15032
-texture = ExtResource("9_hptm8")
-
-[node name="Door3" parent="." instance=ExtResource("4_jjvhh")]
-script = ExtResource("13_k12tt")
-required_key_id = "key_red"
-
-[node name="StaticBody2D" parent="Door3" index="0"]
-position = Vector2(165, 101)
-
-[node name="CollisionShape2D" parent="Door3/StaticBody2D" index="0"]
-position = Vector2(550, 222)
-
-[node name="Area2D" parent="Door3" index="1"]
-position = Vector2(712, 317)
-
-[node name="CollisionShape2D" parent="Door3/Area2D" index="0"]
-position = Vector2(0, 5)
-
-[node name="Sprite2D" parent="Door3" index="2"]
-position = Vector2(714, 321)
-rotation = 0.0
-texture = ExtResource("10_d1ilt")
-
-[node name="Door4" parent="." instance=ExtResource("4_jjvhh")]
-
 [node name="npc1" parent="." instance=ExtResource("12_fdnlq")]
 script = ExtResource("13_fdnlq")
 speed = 65.0
@@ -449,9 +387,16 @@ move_time = Vector2(0.6, 1.6)
 rest_time = Vector2(0.7, 1.5)
 four_directions = true
 
+[node name="key2" parent="." instance=ExtResource("3_8gbba")]
+key_id = "key_green"
+
+[node name="key3" parent="." instance=ExtResource("3_8gbba")]
+key_id = "key_red"
+
+[node name="Door2" parent="." instance=ExtResource("4_jjvhh")]
+required_key_id = "key_green"
+
+[node name="Door3" parent="." instance=ExtResource("4_jjvhh")]
+required_key_id = "key_red"
+
 [editable path="Door"]
-[editable path="key2"]
-[editable path="key3"]
-[editable path="Door2"]
-[editable path="Door3"]
-[editable path="Door4"]
