@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cpeibuxw33k2i" path="res://Free 2D Prison Game Assets By Adarsh S/doorblue.png" id="2_p0e35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0e35"]
-size = Vector2(32, 61)
+size = Vector2(29, 61)
 
 [node name="Door" type="Node2D"]
 position = Vector2(138, 218)

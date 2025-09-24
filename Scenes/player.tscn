@@ -41,7 +41,7 @@ animations = [{
 radius = 10.4403
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
-radius = 11.4018
+radius = 10.0499
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(505, -67)
@@ -63,6 +63,6 @@ shape = SubResource("CircleShape2D_vgqql")
 [node name="Interact" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
-position = Vector2(357, 398)
+position = Vector2(357, 402)
 shape = SubResource("CircleShape2D_cvnsp")
 one_way_collision_margin = 0.0
