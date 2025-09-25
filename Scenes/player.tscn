@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmfha7cccibdm"]
+[gd_scene load_steps=9 format=3 uid="uid://dmo0208yxirpp"]
 
-[ext_resource type="Script" uid="uid://cxyuff3p5hcuf" path="res://Scenes/player_movement.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://cvsfxw6eet3is" path="res://scripts/player_movement.tres.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://sxkjt3rlget6" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/player_spritesheet.png" id="1_v0iea"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
@@ -38,31 +38,32 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgqql"]
-radius = 10.4403
+radius = 9.26369
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
-radius = 10.0499
+radius = 9.05539
 
-[node name="player" type="CharacterBody2D" groups=["player"]]
+[node name="player" type="CharacterBody2D" groups=["npc"]]
 position = Vector2(505, -67)
 motion_mode = 1
 script = ExtResource("1_cvnsp")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(354.5, 393.25)
-scale = Vector2(0.0708283, 0.0558223)
+position = Vector2(43.7498, 284.5)
+scale = Vector2(0.071428, 0.0468188)
 sprite_frames = SubResource("SpriteFrames_6t5aa")
 animation = &"Idle"
 autoplay = "Idle"
 
 [node name="collision2D" type="CollisionShape2D" parent="."]
-position = Vector2(356, 380)
+position = Vector2(45, 275)
 shape = SubResource("CircleShape2D_vgqql")
 
 [node name="Interact" type="Area2D" parent="."]
+position = Vector2(-5, 19)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
-position = Vector2(357, 402)
+position = Vector2(50, 273)
 shape = SubResource("CircleShape2D_cvnsp")
 one_way_collision_margin = 0.0

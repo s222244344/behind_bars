@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c2y1eixnym014" path="res://Scenes/main.gd" id="1_6iyac"]
 [ext_resource type="Texture2D" uid="uid://sk45hqiiry4r" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/tileset_32x32.png" id="1_jjgbg"]
-[ext_resource type="PackedScene" uid="uid://0pcog78i7oqo" path="res://Scenes/player_scene.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cn2h85ivoh7ci" path="res://Scenes/key.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://b6mwd2378kcrc" path="res://Scenes/door.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://c5x5p7j4dl3xt" path="res://Scenes/door.gd" id="5_h1bgf"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://duiliv672o27u" path="res://Free 2D Prison Game Assets By Adarsh S/doorgreen.png" id="9_hptm8"]
 [ext_resource type="PackedScene" uid="uid://cpqmtybov766s" path="res://Scenes/npc..tscn" id="12_fdnlq"]
 [ext_resource type="Script" uid="uid://c5osekphsfdvk" path="res://scripts/npc..gd" id="13_fdnlq"]
+[ext_resource type="PackedScene" uid="uid://du578j41sg0n3" path="res://Scenes/player_scene.tscn" id="13_jkdf5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -134,7 +134,7 @@ size = Vector2(29, 61)
 size = Vector2(25, 61)
 
 [node name="game_scene" type="Node2D"]
-position = Vector2(11, 22)
+position = Vector2(-19, 6)
 script = ExtResource("1_6iyac")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -157,25 +157,17 @@ tile_set = SubResource("TileSet_8gbba")
 
 [node name="Spawn" type="Marker2D" parent="TileMap"]
 position = Vector2(959, 693)
-
-[node name="player_scene" parent="." instance=ExtResource("2_bo1nx")]
-position = Vector2(5, -16)
-
-[node name="player" parent="player_scene" index="0"]
-position = Vector2(388, -73)
-
-[node name="Camera2D" parent="player_scene" index="1"]
-position = Vector2(565, 319)
+scale = Vector2(0.0132498, 0.36408)
 
 [node name="WallColliders" type="StaticBody2D" parent="."]
 position = Vector2(-8, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(18.5, 730.75)
+position = Vector2(-224, 785)
 shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(1008, -8)
+position = Vector2(1028, -8)
 shape = SubResource("RectangleShape2D_8gbba")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WallColliders"]
@@ -247,7 +239,7 @@ position = Vector2(850.5, 37)
 shape = SubResource("RectangleShape2D_hibaj")
 
 [node name="CollisionShape2D20" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(819, 586)
+position = Vector2(857, 1154)
 shape = SubResource("RectangleShape2D_pdsj5")
 
 [node name="CollisionShape2D21" type="CollisionShape2D" parent="WallColliders"]
@@ -263,19 +255,19 @@ position = Vector2(786.5, 34.5)
 shape = SubResource("RectangleShape2D_3pmx8")
 
 [node name="CollisionShape2D24" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(946.25, 589)
+position = Vector2(984.25, 1157)
 shape = SubResource("RectangleShape2D_u50mg")
 
 [node name="CollisionShape2D25" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(1010.25, 591.25)
+position = Vector2(1048.25, 1159.25)
 shape = SubResource("RectangleShape2D_cbgmd")
 
 [node name="CollisionShape2D26" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(882, 588)
+position = Vector2(920, 1156)
 shape = SubResource("RectangleShape2D_1w6v2")
 
 [node name="CollisionShape2D27" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(691, 489)
+position = Vector2(459, 1482)
 shape = SubResource("RectangleShape2D_ueoa1")
 
 [node name="CollisionShape2D28" type="CollisionShape2D" parent="WallColliders"]
@@ -283,11 +275,11 @@ position = Vector2(1820, 1136)
 shape = SubResource("RectangleShape2D_6vcvc")
 
 [node name="CollisionShape2D29" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(1074.75, 600.25)
+position = Vector2(1112.75, 1168.25)
 shape = SubResource("RectangleShape2D_7k868")
 
 [node name="CollisionShape2D30" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(690.75, 405)
+position = Vector2(458.75, 1398)
 shape = SubResource("RectangleShape2D_hpc6h")
 
 [node name="key" parent="." instance=ExtResource("3_8gbba")]
@@ -297,14 +289,14 @@ position = Vector2(644, 1248)
 script = ExtResource("5_h1bgf")
 
 [node name="CollisionShape2D" parent="Door/StaticBody2D" index="0"]
-position = Vector2(522, 230)
+position = Vector2(290, 1223)
 
 [node name="CollisionShape2D" parent="Door/Area2D" index="0"]
-position = Vector2(548.89, 219.5)
+position = Vector2(316.89, 1212.5)
 shape = SubResource("RectangleShape2D_neg2b")
 
 [node name="Sprite2D" parent="Door" index="2"]
-position = Vector2(548.89, 220.5)
+position = Vector2(316.89, 1213.5)
 
 [node name="bed1" type="Sprite2D" parent="."]
 position = Vector2(849, 597)
@@ -413,6 +405,9 @@ move_time = Vector2(0.6, 1.6)
 rest_time = Vector2(0.7, 1.5)
 four_directions = true
 
+[node name="CollisionShape2D" parent="npc7/Interact" index="0"]
+position = Vector2(355, 403)
+
 [node name="key2" parent="." instance=ExtResource("3_8gbba")]
 position = Vector2(123, 1177)
 
@@ -434,14 +429,14 @@ position = Vector2(55, 609)
 [node name="Door2" parent="." instance=ExtResource("4_jjvhh")]
 
 [node name="CollisionShape2D" parent="Door2/StaticBody2D" index="0"]
-position = Vector2(136.89, 349.5)
+position = Vector2(72.89, 823.563)
 
 [node name="CollisionShape2D" parent="Door2/Area2D" index="0"]
-position = Vector2(136.89, 348.5)
+position = Vector2(72.89, 822.563)
 shape = SubResource("RectangleShape2D_kltya")
 
 [node name="Sprite2D" parent="Door2" index="2"]
-position = Vector2(136.89, 348.5)
+position = Vector2(72.89, 822.563)
 
 [node name="Door3" parent="." instance=ExtResource("4_jjvhh")]
 position = Vector2(85.5, 255)
@@ -486,12 +481,18 @@ position = Vector2(298, 325)
 rotation = 0.0
 texture = ExtResource("9_hptm8")
 
-[editable path="player_scene"]
+[node name="player_scene" parent="." instance=ExtResource("13_jkdf5")]
+
 [editable path="key"]
 [editable path="Door"]
+[editable path="npc1"]
+[editable path="npc2"]
+[editable path="npc7"]
 [editable path="key2"]
 [editable path="key3"]
 [editable path="Door2"]
 [editable path="Door3"]
 [editable path="key4"]
 [editable path="Door4"]
+[editable path="player_scene"]
+[editable path="player_scene/player"]
