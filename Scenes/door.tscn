@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cpeibuxw33k2i" path="res://Free 2D Prison Game Assets By Adarsh S/doorblue.png" id="2_p0e35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0e35"]
-size = Vector2(29, 61)
+size = Vector2(30.5, 51.5)
 
 [node name="Door" type="Node2D"]
 position = Vector2(138, 218)
@@ -13,7 +13,7 @@ script = ExtResource("1_w6aom")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(550, 223)
+position = Vector2(548.5, 223.5)
 shape = SubResource("RectangleShape2D_p0e35")
 
 [node name="Area2D" type="Area2D" parent="."]

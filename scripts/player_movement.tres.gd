@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var movement_speed: float = 200
+@export var movement_speed: float = 225
 var character_direction: Vector2 = Vector2.ZERO
 
 # ---------- inventory ----------
