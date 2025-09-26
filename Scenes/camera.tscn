@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://pa7x8cliaph8"]
+
+[ext_resource type="Script" uid="uid://bgtta7tnu3ugp" path="res://scripts/camera_detector.gd" id="1_375tr"]
+[ext_resource type="Texture2D" uid="uid://b6its75w01d6b" path="res://Free 2D Prison Game Assets By Adarsh S/camera.png" id="2_f1cf7"]
+[ext_resource type="AudioStream" uid="uid://cy4is0dni2tv3" path="res://Free 2D Prison Game Assets By Adarsh S/Prison Siren.mp3" id="3_mhsga"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mhsga"]
+radius = 42.0476
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhsga"]
+size = Vector2(18, 25.4688)
+
+[node name="Camera" type="Node2D"]
+script = ExtResource("1_375tr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(115.375, 560.5)
+scale = Vector2(0.316756, 0.22)
+texture = ExtResource("2_f1cf7")
+
+[node name="Vision" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+position = Vector2(129, 524)
+shape = SubResource("CircleShape2D_mhsga")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Vision"]
+position = Vector2(188, 603)
+shape = SubResource("RectangleShape2D_mhsga")
+
+[node name="Siren" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(588, 314)
+stream = ExtResource("3_mhsga")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

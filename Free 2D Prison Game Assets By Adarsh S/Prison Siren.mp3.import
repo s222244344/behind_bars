@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cy4is0dni2tv3"
+path="res://.godot/imported/Prison Siren.mp3-1218a125fedf07e8f2c9a8ebfca982eb.mp3str"
+
+[deps]
+
+source_file="res://Free 2D Prison Game Assets By Adarsh S/Prison Siren.mp3"
+dest_files=["res://.godot/imported/Prison Siren.mp3-1218a125fedf07e8f2c9a8ebfca982eb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

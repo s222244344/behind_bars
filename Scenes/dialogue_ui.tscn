@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpfnacynv4to5"]
+
+[ext_resource type="Script" uid="uid://dkuylpgq2jrse" path="res://scripts/dialogue_ui.gd" id="1_gsrxu"]
+[ext_resource type="Texture2D" uid="uid://b6nvejepnb500" path="res://Free 2D Prison Game Assets By Adarsh S/popup.png" id="2_3gjcu"]
+
+[node name="DialogueUI" type="CanvasLayer" groups=["dialogue_ui"]]
+script = ExtResource("1_gsrxu")
+
+[node name="Popup" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 35.0
+offset_bottom = 25.0
+mouse_filter = 2
+
+[node name="Bubble" type="NinePatchRect" parent="Popup"]
+layout_mode = 0
+offset_right = 39.0
+offset_bottom = 33.0
+texture = ExtResource("2_3gjcu")
+
+[node name="Label" type="RichTextLabel" parent="Popup"]
+layout_mode = 0
+offset_right = 38.0
+offset_bottom = 27.0
