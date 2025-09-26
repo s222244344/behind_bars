@@ -3,8 +3,18 @@ extends Node2D
 
 # Lines you’ll see for THIS NPC only
 @export var lines: Array[String] = [
-	"Keep it down, inmate.",
-	"Guards double their rounds at night."
+	"You got a deathwish inmate?",
+	"Either you can stand there and cause trouble...",
+	"Or I could save your life and give you some advice",
+	"Some rumours have been going around about your plan",
+	"You do some things for me ill be glad to help you out",
+	"First you have to know how this prison works",
+	"red walls = cells, inamtes",
+	"blue walls = offices, cop rooms, storage rooms",
+	"green walls = hallways",
+	"dont be fooled by all the walls, you can walk...",
+	"through them sometimes and they may lead you to what your looking for",
+	"Now get the hell out site unless you plan on unlocking my cell"
 ]
 
 # Optional: show an on-screen hint (e.g., “E”) when player is in range

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://bhjycrjxid38r"]
+[gd_scene load_steps=64 format=4 uid="uid://bhjycrjxid38r"]
 
 [ext_resource type="Script" uid="uid://c2y1eixnym014" path="res://Scenes/main.gd" id="1_6iyac"]
 [ext_resource type="Texture2D" uid="uid://sk45hqiiry4r" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/tileset_32x32.png" id="1_jjgbg"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6mwd2378kcrc" path="res://Scenes/door.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://c5x5p7j4dl3xt" path="res://Scenes/door.gd" id="5_h1bgf"]
 [ext_resource type="Texture2D" uid="uid://c1b47dr0sfyoo" path="res://Free 2D Prison Game Assets By Adarsh S/bed.png" id="5_kry3j"]
-[ext_resource type="PackedScene" uid="uid://d1fig0jikqoiv" path="res://Scenes/inventory_ui.tscn" id="6_21xkr"]
+[ext_resource type="PackedScene" uid="uid://btx8iu7bom1tx" path="res://Scenes/inventory_ui.tscn" id="6_21xkr"]
 [ext_resource type="Texture2D" uid="uid://kqvw6dri0r7r" path="res://Free 2D Prison Game Assets By Adarsh S/keygreen.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://duiliv672o27u" path="res://Free 2D Prison Game Assets By Adarsh S/doorgreen.png" id="9_hptm8"]
 [ext_resource type="Texture2D" uid="uid://bpo26sftyepef" path="res://Free 2D Prison Game Assets By Adarsh S/celldoor.png" id="10_fdnlq"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://du578j41sg0n3" path="res://Scenes/player_scene.tscn" id="13_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://pa7x8cliaph8" path="res://Scenes/camera.tscn" id="14_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://dpfnacynv4to5" path="res://Scenes/dialogue_ui.tscn" id="16_k12tt"]
+[ext_resource type="PackedScene" uid="uid://dsclxi4cv7i4d" path="res://Scenes/game_ui.tscn" id="17_h1bgf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -156,7 +157,7 @@ size = Vector2(29.25, 94.375)
 size = Vector2(60, 29)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsu2k"]
-radius = 81.9085
+radius = 20.8587
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kltya"]
 size = Vector2(66, 35)
@@ -209,7 +210,7 @@ position = Vector2(-447.5, 590.5)
 shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="WallColliders"]
-position = Vector2(162, -256)
+position = Vector2(162, -303)
 shape = SubResource("RectangleShape2D_8gbba")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="WallColliders"]
@@ -452,13 +453,18 @@ four_directions = true
 [node name="npc8" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(283, -360)
 script = ExtResource("10_wsu2k")
-lines = Array[String](["Keep it down, inmate.", "Guards double their rounds at night."])
+lines = Array[String](["You got a deathwish inmate?", "Either you can stand there and cause trouble...", "Or I could save your life and give you some advice", "Some rumours have been going around about your plan", "You do some things for me ill be glad to help you out", "First you have to know how this prison works", "red walls = cells, inamtes", "blue walls = offices, cop rooms, storage rooms", "green walls = hallways", "dont be fooled by all the walls, you can walk...", "through them sometimes and they may lead you to what your looking for", "Now get the hell out site unless you plan on unlocking my cell"])
 show_prompt = true
 
+[node name="collision2D" parent="npc8" index="1"]
+scale = Vector2(1.14834, 1)
+
 [node name="Interact" type="Area2D" parent="npc8"]
+scale = Vector2(1.15036, 0.996108)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc8/Interact"]
 position = Vector2(339, 445)
+scale = Vector2(2.37832, 2.71191)
 shape = SubResource("CircleShape2D_wsu2k")
 
 [node name="Prompt" type="Node2D" parent="npc8"]
@@ -945,6 +951,7 @@ position = Vector2(9, 270)
 
 [node name="Interact" parent="player_scene/player" index="2"]
 position = Vector2(-5, 21)
+scale = Vector2(0.964961, 1.04979)
 
 [node name="CollisionShape2D" parent="player_scene/player/Interact" index="0"]
 position = Vector2(575, 423)
@@ -1008,6 +1015,7 @@ position = Vector2(1024.62, 218)
 
 [node name="Camera3" parent="." instance=ExtResource("14_jkdf5")]
 position = Vector2(614, -319)
+scale = Vector2(0.983027, 0.996664)
 
 [node name="Sprite2D" parent="Camera3" index="0"]
 position = Vector2(494, 466)
@@ -1047,6 +1055,47 @@ position = Vector2(103.379, 584)
 position = Vector2(1024.62, 218)
 
 [node name="DialogueUI" parent="." instance=ExtResource("16_k12tt")]
+position = Vector2(724, -95)
+
+[node name="Popup" parent="DialogueUI" index="0"]
+visible = false
+
+[node name="Bubble" parent="DialogueUI/Popup" index="0"]
+visible = false
+anchor_left = -2.254
+anchor_top = -3.65714
+anchor_right = 3.79986
+anchor_bottom = -2.17143
+offset_left = -9.11
+offset_top = 86.0
+offset_right = -42.995
+offset_bottom = 176.0
+
+[node name="Label" parent="DialogueUI/Popup" index="1"]
+anchor_left = -3.96986
+anchor_top = -0.914143
+anchor_right = 2.45686
+anchor_bottom = 3.354
+offset_left = 54.945
+offset_bottom = -44.39
+
+[node name="GameUI" parent="." instance=ExtResource("17_h1bgf")]
+layer = 100
+offset = Vector2(-16, 16)
+transform = Transform2D(1, 0, 0, 1, -16, 16)
+
+[node name="DayLabel" parent="GameUI" index="0"]
+anchors_preset = -1
+anchor_left = 1.222
+anchor_top = 0.596
+anchor_right = 1.332
+anchor_bottom = 0.741
+offset_left = -209.744
+offset_top = 116.792
+offset_right = -210.464
+offset_bottom = 116.832
+text = "Day 14"
+metadata/_edit_use_anchors_ = true
 
 [editable path="key"]
 [editable path="Door"]
@@ -1080,3 +1129,5 @@ position = Vector2(1024.62, 218)
 [editable path="Camera2"]
 [editable path="Camera3"]
 [editable path="Camera4"]
+[editable path="DialogueUI"]
+[editable path="GameUI"]

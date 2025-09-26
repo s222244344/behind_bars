@@ -1,9 +1,11 @@
-extends CanvasLayer
-
-@onready var popup: Control = $Popup               # <- direct child
-@onready var text: RichTextLabel = $Popup/Label    # or Label, match your node type
+# res://scripts/dialogue_ui.gd
+extends Node2D
+class_name DialogueUI
 
 signal closed
+
+@onready var popup: Control = $Popup
+@onready var text: RichTextLabel = $Popup/Label
 
 var _lines: Array[String] = []
 var _i := 0
@@ -23,3 +25,13 @@ func _finish() -> void:
 	popup.visible = false
 	_active = false
 	closed.emit()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not _active: return
+	if event.is_action_pressed("interact"):
+		_i += 1
+		if _i >= _lines.size():
+			_finish()
+		else:
+			_update_label()
+		get_viewport().set_input_as_handled()

@@ -64,8 +64,12 @@ func _on_vision_exited(body: Node) -> void:
 	_triggered = false
 
 func _on_timeout() -> void:
+	# Decrement the day first
+	get_tree().call_group("day_counter", "dec_day")
+
 	if respawn_on_catch:
 		get_tree().reload_current_scene()
+
 	_triggered = false
 	if siren and siren.playing:
 		siren.stop()
