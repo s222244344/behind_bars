@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://4xje48i61q4p"]
+
+[ext_resource type="Script" uid="uid://beglndnhkv4yy" path="res://scripts/intro_ui.gd" id="1_w6bm0"]
+
+[node name="IntroUI" type="CanvasLayer" groups=["intro_ui"]]
+layer = 15
+script = ExtResource("1_w6bm0")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

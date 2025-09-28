@@ -9,7 +9,7 @@ extends Node2D
 @export var use_line_of_sight := false     # raycast check (optional)
 @export var los_mask: int = 1              # walls layer if using LOS
 
-@export var alarm_duration := 3.0          # seconds before reset
+@export var alarm_duration := 1.5          # seconds before reset
 @export var respawn_on_catch := true       # reload scene after alarm
 @export var cancel_alarm_on_exit := true   # stop siren/timer if player leaves
 

@@ -1,15 +1,16 @@
-[gd_scene load_steps=75 format=4 uid="uid://bhjycrjxid38r"]
+[gd_scene load_steps=74 format=4 uid="uid://bhjycrjxid38r"]
 
-[ext_resource type="Script" uid="uid://c2y1eixnym014" path="res://scripts/main.gd" id="1_6iyac"]
+[ext_resource type="Script" uid="uid://c2y1eixnym014" path="res://Scenes/main.gd" id="1_6iyac"]
 [ext_resource type="Texture2D" uid="uid://sk45hqiiry4r" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/tileset_32x32.png" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://cn2h85ivoh7ci" path="res://Scenes/key.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://b6mwd2378kcrc" path="res://Scenes/door.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://c5x5p7j4dl3xt" path="res://Scenes/door.gd" id="5_h1bgf"]
 [ext_resource type="Texture2D" uid="uid://c1b47dr0sfyoo" path="res://Free 2D Prison Game Assets By Adarsh S/bed.png" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://btx8iu7bom1tx" path="res://Scenes/inventory_ui.tscn" id="6_21xkr"]
 [ext_resource type="Texture2D" uid="uid://kqvw6dri0r7r" path="res://Free 2D Prison Game Assets By Adarsh S/keygreen.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://duiliv672o27u" path="res://Free 2D Prison Game Assets By Adarsh S/doorgreen.png" id="9_hptm8"]
-[ext_resource type="Script" uid="uid://cno6surw7yjcy" path="res://scripts/npc8(ally)..gd" id="10_3pmx8"]
 [ext_resource type="Texture2D" uid="uid://bpo26sftyepef" path="res://Free 2D Prison Game Assets By Adarsh S/celldoor.png" id="10_fdnlq"]
+[ext_resource type="Script" uid="uid://dp3wrcff4xj1m" path="res://scripts/npc8(ally)..gd" id="10_wsu2k"]
 [ext_resource type="PackedScene" uid="uid://cpqmtybov766s" path="res://Scenes/npc..tscn" id="12_fdnlq"]
 [ext_resource type="Script" uid="uid://c5osekphsfdvk" path="res://scripts/npc..gd" id="13_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://du578j41sg0n3" path="res://Scenes/player_scene.tscn" id="13_jkdf5"]
@@ -22,7 +23,6 @@
 [ext_resource type="AudioStream" uid="uid://nbeiev8n4hfm" path="res://Free 2D Prison Game Assets By Adarsh S/Police! FREEZE! Sound Effect.mp3" id="22_3pmx8"]
 [ext_resource type="Texture2D" uid="uid://c77n2nqvjf8p0" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/pipesblue.png" id="22_u50mg"]
 [ext_resource type="Texture2D" uid="uid://b158ty6qbbw07" path="res://Free 2D Prison Game Assets By Adarsh S/desk.png" id="23_cbgmd"]
-[ext_resource type="PackedScene" uid="uid://4xje48i61q4p" path="res://Scenes/intro_ui.tscn" id="24_3pmx8"]
 [ext_resource type="Texture2D" uid="uid://caywb6v2whb8d" path="res://Free 2D Prison Game Assets By Adarsh S/Tree_Cartoon_PNG_Clip_Art_Image.png" id="25_1w6v2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
@@ -169,67 +169,17 @@ size = Vector2(602.5, 29)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8vy0"]
 size = Vector2(509, 25)
 
-[sub_resource type="GDScript" id="GDScript_gt3je"]
-script/source = "extends Node2D
-@export var required_key_id: String = \"key_blue\"
-@export var consume_key := true
-@export var temporary_open := false
-@export var reopen_after := 2.0
-
-var _player: Node = null
-@onready var _collider: CollisionShape2D = $StaticBody2D/CollisionShape2D
-@onready var _sprite: Sprite2D = $Sprite2D
-
-func _ready() -> void:
-	$Area2D.body_entered.connect(_on_body_entered)
-	$Area2D.body_exited.connect(_on_body_exited)
-	if _collider: _collider.disabled = false
-
-func _process(_d: float) -> void:
-	if _player and Input.is_action_just_pressed(\"interact\"):
-		_try_open()
-
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group(\"player\"):
-		_player = body
-		print(\"Door armed for\", body.name, \"needs\", required_key_id)
-
-func _on_body_exited(body: Node) -> void:
-	if body == _player: _player = null
-
-func _try_open() -> void:
-	if not _player: return
-	if _player.has_method(\"has_item\") and _player.has_item(required_key_id, 1):
-		if consume_key and _player.has_method(\"remove_item\"):
-			_player.remove_item(required_key_id, 1)
-		_open()
-	else:
-		print(\"Locked:\", name, \"needs\", required_key_id)
-
-func _open() -> void:
-	if _collider: _collider.disabled = true
-	if _sprite: _sprite.modulate.a = 0.35
-	print(\"Opened:\", name)
-	if temporary_open:
-		var t := get_tree().create_timer(reopen_after)
-		t.timeout.connect(_relock)
-
-func _relock() -> void:
-	if _collider: _collider.disabled = false
-	if _sprite: _sprite.modulate.a = 1.0
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_neg2b"]
 size = Vector2(60, 29)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsu2k"]
-radius = 11.4271
+radius = 10.6577
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kltya"]
 size = Vector2(66, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e08e2"]
-size = Vector2(53, 92.5)
+size = Vector2(32, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r33sp"]
 size = Vector2(25, 61)
@@ -449,7 +399,7 @@ position = Vector2(-475, 241)
 position = Vector2(-474, 240)
 
 [node name="Door" parent="." instance=ExtResource("4_jjvhh")]
-script = SubResource("GDScript_gt3je")
+script = ExtResource("5_h1bgf")
 
 [node name="CollisionShape2D" parent="Door/StaticBody2D" index="0"]
 position = Vector2(241, 1196)
@@ -523,16 +473,16 @@ texture = ExtResource("5_kry3j")
 [node name="npc1" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(760, -363)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc8" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(-166, -574)
-script = ExtResource("10_3pmx8")
+script = ExtResource("10_wsu2k")
 lines = Array[String](["You got a deathwish inmate?", "Either you can stand there and cause trouble...", "Or I could save your life and give you some advice", "Some rumours have been going around about your plan", "You do some things for me ill be glad to help you out", "First you have to know how this prison works", "red walls = cells, inamtes", "blue walls = offices, cop rooms, storage rooms", "green walls = hallways", "dont be fooled by all the walls, you can walk...", "through them sometimes and they may lead you to what your looking for", "Now get the hell out site unless you plan on unlocking my cell"])
 show_prompt = true
-bubble_anchor_path = NodePath("Interact/CollisionShape2D")
-bubble_offset = Vector2(120, -60)
-use_fixed_position = false
-fixed_world_pos = Vector2(816, 492)
 
 [node name="sprite" parent="npc8" index="0"]
 position = Vector2(773, 603)
@@ -545,7 +495,7 @@ scale = Vector2(1.14834, 1)
 scale = Vector2(1.15036, 0.996108)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc8/Interact"]
-position = Vector2(1124, 1184.61)
+position = Vector2(1128.34, 1183.61)
 scale = Vector2(2.37832, 2.71191)
 shape = SubResource("CircleShape2D_wsu2k")
 
@@ -555,46 +505,90 @@ position = Vector2(353, 417)
 [node name="npc2" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(427, 231)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc3" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(279, 235)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc4" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(117, 237)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc5" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(600, 234)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc9" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(-44, -365)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc13" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(-203, -363)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc10" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(604, -362)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc11" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(116, -363)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc12" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(380, -370)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc6" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(-261, 228)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="npc7" parent="." instance=ExtResource("12_fdnlq")]
 position = Vector2(-39, 235)
 script = ExtResource("13_fdnlq")
+speed = null
+move_time = null
+rest_time = null
+four_directions = null
 
 [node name="key2" parent="." instance=ExtResource("3_8gbba")]
 position = Vector2(-1048, 1841)
@@ -852,7 +846,7 @@ position = Vector2(816.14, 493.5)
 position = Vector2(178, -657)
 
 [node name="CollisionShape2D" parent="Door14/Area2D" index="0"]
-position = Vector2(816.39, 493.5)
+position = Vector2(816.39, 492.5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_e08e2")
 
@@ -874,7 +868,7 @@ position = Vector2(816.14, 493.5)
 position = Vector2(18, -660)
 
 [node name="CollisionShape2D" parent="Door15/Area2D" index="0"]
-position = Vector2(816.39, 511.75)
+position = Vector2(816.39, 492.5)
 shape = SubResource("RectangleShape2D_e08e2")
 
 [node name="Sprite2D" parent="Door15" index="2"]
@@ -952,11 +946,11 @@ position = Vector2(515, 69)
 key_id = "key_green"
 
 [node name="Sprite2D" parent="key4" index="0"]
-position = Vector2(13.029, 261.404)
+position = Vector2(206.029, 18.4039)
 texture = ExtResource("7_344ge")
 
 [node name="CollisionShape2D" parent="key4" index="1"]
-position = Vector2(13.029, 261.404)
+position = Vector2(206.029, 18.4039)
 
 [node name="Door4" parent="." instance=ExtResource("4_jjvhh")]
 required_key_id = "key_green"
@@ -995,7 +989,7 @@ scale = Vector2(0.964961, 1.04979)
 position = Vector2(7.25413, 259.099)
 
 [node name="Camera2D" parent="player_scene" index="1"]
-position = Vector2(1491, 441)
+position = Vector2(1494, 438)
 
 [node name="bed11" type="Sprite2D" parent="."]
 position = Vector2(664, 27)
@@ -1136,7 +1130,7 @@ scale = Vector2(0.872349, 0.889299)
 texture = ExtResource("19_fevyy")
 
 [node name="Table1" type="Sprite2D" parent="Table1/Table1/Table1/Table1/Table1"]
-position = Vector2(31836.9, -1917.35)
+position = Vector2(19244.7, -2556.45)
 scale = Vector2(-43.4621, 114.854)
 texture = ExtResource("19_fevyy")
 
@@ -1218,7 +1212,8 @@ scale = Vector2(0.734836, 0.906691)
 texture = ExtResource("25_1w6v2")
 
 [node name="DialogueUI" parent="." instance=ExtResource("16_k12tt")]
-position = Vector2(707, 204)
+position = Vector2(390, 131)
+scale = Vector2(1, 0.038)
 
 [node name="Popup" parent="DialogueUI" index="0"]
 offset_left = 13.0
@@ -1226,160 +1221,26 @@ offset_top = 69.0
 offset_right = 44.0
 offset_bottom = 879.0
 scale = Vector2(3.51178, 1.85294)
-
-[node name="Label" parent="DialogueUI/Popup" index="0"]
-anchor_left = -1.28562
-anchor_top = 0.82
-anchor_right = -1.28562
-anchor_bottom = 85.0442
-offset_left = 0.854268
-offset_top = -1184.2
-offset_right = 116.854
-offset_bottom = 857.166
-tab_size = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Bubble" parent="DialogueUI/Popup" index="1"]
+[node name="Bubble" parent="DialogueUI/Popup" index="0"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -1.277
-anchor_top = -0.327
-anchor_right = -1.277
-anchor_bottom = -0.327
-offset_left = -42.7074
-offset_top = -184.231
-offset_right = 66.2926
-offset_bottom = 64834.8
+anchor_left = -0.23
+anchor_top = -0.765
+anchor_right = -0.23
+anchor_bottom = -0.765
+offset_left = 10.5689
+offset_top = -94.1462
+offset_right = 40.5689
+offset_bottom = 715.854
 
-[node name="cell numbers" type="Node" parent="."]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="cell numbers"]
-offset_left = 1107.0
-offset_top = 56.0
-offset_right = 1169.0
-offset_bottom = 96.0
-text = "Cell 1 
-"
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="cell numbers"]
-offset_left = 932.0
-offset_top = 57.0
-offset_right = 994.0
-offset_bottom = 97.0
-text = "Cell 2
- 
-"
-
-[node name="RichTextLabel4" type="RichTextLabel" parent="cell numbers"]
-offset_left = 771.0
-offset_top = 56.0
-offset_right = 833.0
-offset_bottom = 96.0
-text = "Cell 3
-
-"
-
-[node name="RichTextLabel5" type="RichTextLabel" parent="cell numbers"]
-offset_left = 614.0
-offset_top = 58.0
-offset_right = 676.0
-offset_bottom = 98.0
-text = "Cell 4
-
-"
-
-[node name="RichTextLabel6" type="RichTextLabel" parent="cell numbers"]
-offset_left = 452.0
-offset_top = 57.0
-offset_right = 514.0
-offset_bottom = 97.0
-text = "Cell 5
-
-"
-
-[node name="RichTextLabel7" type="RichTextLabel" parent="cell numbers"]
-offset_left = 289.0
-offset_top = 53.0
-offset_right = 351.0
-offset_bottom = 93.0
-text = "Cell 6
-
-"
-
-[node name="RichTextLabel8" type="RichTextLabel" parent="cell numbers"]
-offset_left = 133.0
-offset_top = 55.0
-offset_right = 195.0
-offset_bottom = 95.0
-text = "Cell 7
-
-"
-
-[node name="RichTextLabel9" type="RichTextLabel" parent="cell numbers"]
-offset_left = 173.0
-offset_top = 608.0
-offset_right = 235.0
-offset_bottom = 648.0
-rotation = 3.14159
-text = "Cell 8
- 
-"
-
-[node name="RichTextLabel10" type="RichTextLabel" parent="cell numbers"]
-offset_left = 335.0
-offset_top = 610.0
-offset_right = 397.0
-offset_bottom = 650.0
-rotation = 3.14159
-text = "Cell 9 
-"
-
-[node name="RichTextLabel11" type="RichTextLabel" parent="cell numbers"]
-offset_left = 495.0
-offset_top = 610.0
-offset_right = 557.0
-offset_bottom = 650.0
-rotation = 3.14159
-text = "Cell 10
-"
-
-[node name="RichTextLabel12" type="RichTextLabel" parent="cell numbers"]
-offset_left = 658.0
-offset_top = 611.0
-offset_right = 720.0
-offset_bottom = 651.0
-rotation = 3.14159
-text = "Cell 11 
-"
-
-[node name="RichTextLabel13" type="RichTextLabel" parent="cell numbers"]
-offset_left = 815.0
-offset_top = 610.0
-offset_right = 877.0
-offset_bottom = 650.0
-rotation = 3.14159
-text = "Cell 12 
-"
-
-[node name="RichTextLabel14" type="RichTextLabel" parent="cell numbers"]
-offset_left = 969.0
-offset_top = 607.0
-offset_right = 1031.0
-offset_bottom = 647.0
-rotation = 3.14159
-text = "Cell 13 
-"
-
-[node name="RichTextLabel15" type="RichTextLabel" parent="cell numbers"]
-offset_left = 1134.0
-offset_top = 609.0
-offset_right = 1196.0
-offset_bottom = 649.0
-rotation = 3.14159
-text = "Cell 14 
-"
-
-[node name="IntroUI" parent="." instance=ExtResource("24_3pmx8")]
+[node name="Label" parent="DialogueUI/Popup" index="1"]
+offset_left = 0.854259
+offset_top = -23.0359
+offset_right = 35.8543
+offset_bottom = 842.964
+tab_size = 3
 
 [editable path="key"]
 [editable path="Door"]
@@ -1416,4 +1277,3 @@ text = "Cell 14
 [editable path="GameUI"]
 [editable path="cop"]
 [editable path="DialogueUI"]
-[editable path="IntroUI"]

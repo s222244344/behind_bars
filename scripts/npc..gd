@@ -1,12 +1,15 @@
-# npc.gd
 extends CharacterBody2D
 
 @export var speed: float = 65.0
-@export var move_time := Vector2(0.6, 1.6)   # seconds [min,max] while moving
-@export var rest_time := Vector2(0.7, 1.5)   # seconds [min,max] while idling
-@export var four_directions := true          # true = N/S/E/W only; false = any angle
+@export var move_time := Vector2(0.6, 1.6)   # [min,max] seconds while moving
+@export var rest_time := Vector2(0.7, 1.5)   # [min,max] seconds while idling
+@export var four_directions := true          # true=N/S/E/W only
 
-@onready var sprite: AnimatedSprite2D = $sprite   # child must be AnimatedSprite2D
+# Set these to your actual animation names
+@export var anim_idle: String = "Idle"
+@export var anim_walk: String = "Walking"
+
+@onready var sprite: AnimatedSprite2D = $sprite
 
 var _rng := RandomNumberGenerator.new()
 var _dir := Vector2.ZERO
@@ -23,7 +26,6 @@ func _physics_process(delta: float) -> void:
 	if _state == "move":
 		velocity = _dir * speed
 		move_and_slide()
-		# If we bump into something, choose a new direction
 		if is_on_wall() or is_on_floor() or is_on_ceiling():
 			_pick_move()
 	else:
@@ -42,22 +44,24 @@ func _pick_move() -> void:
 	_time_left = _rng.randf_range(move_time.x, move_time.y)
 	_dir = _random_direction()
 
-func _pick_idle() -> void:
+func _pick_idle(duration: float = -1.0) -> void:
 	_state = "idle"
-	_time_left = _rng.randf_range(rest_time.x, rest_time.y)
+	_time_left = duration if duration > 0.0 else _rng.randf_range(rest_time.x, rest_time.y)
 	_dir = Vector2.ZERO
+	if sprite and anim_idle != "":
+		sprite.play(anim_idle)
 
 func _random_direction() -> Vector2:
 	if four_directions:
 		var dirs := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
 		return dirs[_rng.randi_range(0, dirs.size() - 1)]
-	var angle := _rng.randf() * TAU
-	return Vector2(cos(angle), sin(angle)).normalized()
+	var ang := _rng.randf() * TAU
+	return Vector2(cos(ang), sin(ang)).normalized()
 
 func _update_sprite() -> void:
 	if sprite == null:
 		return
 	sprite.flip_h = _dir.x < 0
-	var anim: String = "Walking" if _state == "move" else "Idle"
-	if sprite.animation != anim:
+	var anim: String = anim_walk if _state == "move" else anim_idle
+	if sprite.animation != anim and anim != "":
 		sprite.play(anim)

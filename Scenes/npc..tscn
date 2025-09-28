@@ -5,56 +5,71 @@
 [sub_resource type="GDScript" id="GDScript_xgot7"]
 script/source = "extends CharacterBody2D
 
-@export var movement_speed: float = 200
-var character_direction: Vector2 = Vector2.ZERO
+@export var speed: float = 65.0
+@export var move_time := Vector2(0.6, 1.6)   # [min,max] seconds while moving
+@export var rest_time := Vector2(0.7, 1.5)   # [min,max] seconds while idling
+@export var four_directions := true          # true=N/S/E/W only
 
-# ---------- inventory ----------
-signal inventory_changed(inventory: Dictionary)
-var inventory: Dictionary = {}
+# Match your actual animation names here
+@export var anim_idle: String = \"Idle\"
+@export var anim_walk: String = \"Walking\"
+
+@onready var sprite: AnimatedSprite2D = $sprite
+
+var _rng := RandomNumberGenerator.new()
+var _dir := Vector2.ZERO
+var _state := \"idle\"     # \"idle\" or \"move\"
+var _time_left := 0.0
 
 func _ready() -> void:
-	# Ensure the HUD can always find us
-	add_to_group(\"player\")
+	_rng.randomize()
+	_pick_idle()
 
-func add_item(id: String, amount := 1) -> void:
-	inventory[id] = inventory.get(id, 0) + amount
-	print(\"[PLAYER] picked:\", id, \" total:\", inventory[id])
-	inventory_changed.emit(inventory)
+func _physics_process(delta: float) -> void:
+	_time_left -= delta
 
-func has_item(id: String, amount := 1) -> bool:
-	return inventory.get(id, 0) >= amount
-
-func remove_item(id: String, amount := 1) -> bool:
-	var have := int(inventory.get(id, 0))
-	if have >= amount:
-		var left := have - amount
-		if left > 0:
-			inventory[id] = left
-		else:
-			inventory.erase(id)
-		print(\"[PLAYER] used:\", id, \" left:\", inventory.get(id, 0))
-		inventory_changed.emit(inventory)
-		return true
-	return false
-# --------------------------------
-
-func _physics_process(_delta: float) -> void:
-	character_direction.x = Input.get_axis(\"move_left\", \"move_right\")
-	character_direction.y = Input.get_axis(\"move_up\", \"move_down\")
-
-	if character_direction.x > 0:
-		%sprite.flip_h = false
-	elif character_direction.x < 0:
-		%sprite.flip_h = true
-
-	if character_direction:
-		velocity = character_direction * movement_speed
-		if %sprite.animation != \"Walking\": %sprite.animation = \"Walking\"
+	if _state == \"move\":
+		velocity = _dir * speed
+		move_and_slide()
+		if is_on_wall() or is_on_floor() or is_on_ceiling():
+			_pick_move()
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, movement_speed)
-		if %sprite.animation != \"Idle\": %sprite.animation = \"Idle\"
+		velocity = Vector2.ZERO
 
-	move_and_slide()
+	if _time_left <= 0.0:
+		if _state == \"move\":
+			_pick_idle()
+		else:
+			_pick_move()
+
+	_update_sprite()
+
+func _pick_move() -> void:
+	_state = \"move\"
+	_time_left = _rng.randf_range(move_time.x, move_time.y)
+	_dir = _random_direction()
+
+func _pick_idle(duration: float = -1.0) -> void:
+	_state = \"idle\"
+	_time_left = duration if duration > 0.0 else _rng.randf_range(rest_time.x, rest_time.y)
+	_dir = Vector2.ZERO
+	if sprite and anim_idle != \"\":
+		sprite.play(anim_idle)
+
+func _random_direction() -> Vector2:
+	if four_directions:
+		var dirs := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
+		return dirs[_rng.randi_range(0, dirs.size() - 1)]
+	var ang := _rng.randf() * TAU
+	return Vector2(cos(ang), sin(ang)).normalized()
+
+func _update_sprite() -> void:
+	if sprite == null:
+		return
+	sprite.flip_h = _dir.x < 0
+	var anim: String = anim_walk if _state == \"move\" else anim_idle
+	if sprite.animation != anim and anim != \"\":
+		sprite.play(anim)
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]

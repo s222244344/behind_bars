@@ -1,7 +1,5 @@
-# res://scripts/npc8.gd
 extends Node2D
 
-# Lines you’ll see for THIS NPC only
 @export var lines: Array[String] = [
 	"You got a deathwish inmate?",
 	"Either you can stand there and cause trouble...",
@@ -17,18 +15,25 @@ extends Node2D
 	"Now get the hell out site unless you plan on unlocking my cell"
 ]
 
-# Optional: show an on-screen hint (e.g., “E”) when player is in range
 @export var show_prompt := true
+
+# --- Positioning controls ---
+@export var bubble_anchor_path: NodePath = ^"Interact/CollisionShape2D"
+@export var bubble_offset: Vector2 = Vector2(120, -60)  # nudge from anchor (right & up)
+@export var use_fixed_position := false                  # set true to use the value below
+@export var fixed_world_pos: Vector2 = Vector2(816, 492) # your red-rectangle target
+# ----------------------------
 
 var _player_in := false
 @onready var _interact: Area2D = $Interact
-@onready var _prompt: Node2D = $Prompt if has_node("Prompt") else null  # optional sprite/label
+@onready var _prompt: Node2D = $Prompt if has_node("Prompt") else null
 
 func _ready() -> void:
 	_interact.body_entered.connect(_on_enter)
 	_interact.body_exited.connect(_on_exit)
 	if _prompt:
 		_prompt.visible = false
+	set_process_unhandled_input(true)
 
 func _on_enter(body: Node) -> void:
 	if body.is_in_group("player"):
@@ -42,15 +47,32 @@ func _on_exit(body: Node) -> void:
 		if _prompt:
 			_prompt.visible = false
 
+func _get_anchor_world_pos() -> Vector2:
+	if bubble_anchor_path != NodePath() and has_node(bubble_anchor_path):
+		var n := get_node(bubble_anchor_path)
+		if n is Node2D:
+			return (n as Node2D).global_position
+	return global_position
+
 func _unhandled_input(event: InputEvent) -> void:
-	if not _player_in: return
-	if event.is_action_pressed("interact"):
-		var ui := get_tree().get_first_node_in_group("dialogue_ui")
-		if ui:
-			# (Optional) freeze player movement during dialogue
-			get_tree().call_group("player", "set_process", false)
-			ui.closed.connect(func():
-				get_tree().call_group("player", "set_process", true)
-			, CONNECT_ONE_SHOT)
-			ui.show_dialogue(lines)
-			get_viewport().set_input_as_handled()
+	if not _player_in:
+		return
+
+	var pressed := event.is_action_pressed("interact")
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		pressed = true
+	if not pressed:
+		return
+
+	var ui = get_tree().get_first_node_in_group("dialogue_ui")
+	if ui:
+		get_tree().call_group("player", "set_process", false)
+		ui.closed.connect(func():
+			get_tree().call_group("player", "set_process", true)
+		, CONNECT_ONE_SHOT)
+
+		var world_target: Vector2 = fixed_world_pos if use_fixed_position \
+			else _get_anchor_world_pos() + bubble_offset
+
+		ui.show_dialogue_at_world(world_target, lines)
+		get_viewport().set_input_as_handled()
