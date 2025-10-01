@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmjxil0kc3wn0"]
+
+[ext_resource type="Script" uid="uid://b8hjsgob6asr" path="res://scripts/dialogue_ui_npc_2.gd" id="1_5m06e"]
+
+[node name="DialogueUI" type="Node2D" groups=["dialogue_ui_npc"]]
+position = Vector2(0, 2)
+scale = Vector2(1, 0.038)
+script = ExtResource("1_5m06e")
+
+[node name="Popup" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -52.6316
+offset_right = 30.0
+offset_bottom = 9947.37
+scale = Vector2(1, 0.038)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="RichTextLabel" parent="Popup"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 26.0
+offset_bottom = 273364.0
+scale = Vector2(1, 0.038)
+
+[node name="Bubble" type="NinePatchRect" parent="Popup"]
+layout_mode = 0
+offset_right = 26.0
+offset_bottom = 255139.0
+scale = Vector2(1, 0.038)

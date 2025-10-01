@@ -1,22 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://btx8iu7bom1tx"]
+[gd_scene load_steps=2 format=3 uid="uid://lt5ecbh116se"]
 
-[ext_resource type="Script" uid="uid://6kgocq6rkm7h" path="res://inventory_ui.gd" id="1_8su62"]
+[ext_resource type="Script" uid="uid://cm4x4bb4vyysk" path="res://scripts/inventory_ui.gd" id="1_8su62"]
 
-[node name="inventory_UI" type="CanvasLayer"]
+[node name="InventoryUI" type="CanvasLayer"]
+layer = 50
 script = ExtResource("1_8su62")
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 40.0
+[node name="Panel" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
 offset_bottom = 40.0
+grow_horizontal = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
-text = "Inventory"
-
-[node name="ItemList" type="ItemList" parent="Panel/VBoxContainer"]
+[node name="Row" type="HBoxContainer" parent="Panel"]
 layout_mode = 2

@@ -24,6 +24,7 @@ offset_bottom = 273364.0
 scale = Vector2(1, 0.038)
 
 [node name="Bubble" type="NinePatchRect" parent="Popup"]
+layout_mode = 0
 offset_right = 26.0
 offset_bottom = 255139.0
 scale = Vector2(1, 0.038)

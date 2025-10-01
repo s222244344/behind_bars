@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://ope7rnlv4kqo"]
+
+[ext_resource type="Script" uid="uid://b6d2e6vyg6s0c" path="res://scripts/evidence_viewer.gd" id="1_mwara"]
+[ext_resource type="Texture2D" uid="uid://bhxrhlto3c3ry" path="res://Free 2D Prison Game Assets By Adarsh S/Fake-evidence.PNG" id="1_ncr0s"]
+
+[node name="EvidenceViewer" type="CanvasLayer" groups=["evidence_viewer"]]
+script = ExtResource("1_mwara")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0313726, 0.0313726, 0.0313726, 0.235294)
+
+[node name="Image" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.5
+offset_top = -315.0
+offset_right = 210.5
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ncr0s")
+
+[node name="CloseBtn" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_bottom = 61.0
+grow_horizontal = 0
+text = "Close"

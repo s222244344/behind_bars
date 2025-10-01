@@ -8,7 +8,7 @@ signal closed
 # --- knobs you can tweak in the inspector ---
 @export var popup_size: Vector2   = Vector2(300, 140)   # size of the popup
 @export var world_offset: Vector2 = Vector2(0, -16)     # shift above NPC (world units/pixels)
-@export var screen_nudge: Vector2 = Vector2.ZERO        # final nudge on screen (pixels)
+@export var screen_nudge: Vector2 = Vector2(-450, 180)        # final nudge on screen (pixels)
 
 var _lines: Array[String] = []
 var _i: int = 0

@@ -1,18 +1,18 @@
 extends Node2D
 
 @export var lines: Array[String] = [
-	"You got a deathwish inmate?",
-	"Either you can stand there and cause trouble...",
-	"Or I could save your life and give you some advice",
-	"Some rumours have been going around about your plan",
-	"You do some things for me ill be glad to help you out",
-	"First you have to know how this prison works",
-	"red walls = cells, inamtes",
-	"blue walls = offices, cop rooms, storage rooms",
-	"green walls = hallways",
-	"dont be fooled by all the walls, you can walk...",
-	"through them sometimes and they may lead you to what your looking for",
-	"Now get the hell out site unless you plan on unlocking my cell"
+	"You got a deathwish, inmate?",
+	"Either you can keep standing there causing trouble…",
+	"Or I could save your hide and give you some advice.",
+	"Rumours are rolling about this crazy plan of yours.",
+	"If you do some work for me, I'll return the favour.",
+	"First—learn how this place is laid out:",
+	"Red walls = cells (inmates).",
+	"Blue walls = offices, guard rooms, storage.",
+	"Green areas = corridors and walkways.",
+	"Don’t trust every wall — some are just scenery, some hide paths.",
+	"When you find keys, don't waste them. Talk to my neighbour — he can help.",
+	"Now scram unless you plan on unlocking my cell."
 ]
 
 @export var show_prompt := true

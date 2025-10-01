@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://ope7rnlv4kqo"]
+
+[ext_resource type="Script" uid="uid://b6d2e6vyg6s0c" path="res://scripts/evidence_viewer.gd" id="1_mwara"]
+[ext_resource type="Texture2D" uid="uid://dl5gejkgsscjd" path="res://Free 2D Prison Game Assets By Adarsh S/tiles/Capture.PNG" id="2_mwara"]
+
+[node name="EvidenceViewer" type="CanvasLayer" groups=["evidence_viewer"]]
+script = ExtResource("1_mwara")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0313726, 0.0313726, 0.0313726, 0.235294)
+
+[node name="Image" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.476
+anchor_top = 0.44
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.352
+offset_top = -285.12
+offset_right = 200.0
+offset_bottom = 325.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mwara")
+
+[node name="TextEdit" type="TextEdit" parent="Image"]
+layout_mode = 0
+offset_left = 449.0
+offset_top = 114.0
+offset_right = 686.0
+offset_bottom = 387.0
+text = "You've found the evidence ! if you have found the green key RUN ! THEY ARE ONTO YOU, GO THROUGH THE GREEN DOOR AND YOU HAVE 40 SECONDS TO ESCAPE!!!! if you didn't find the key keep searching through the desks"
+wrap_mode = 1
+
+[node name="CloseBtn" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -159.0
+offset_top = 2.0
+offset_right = -56.0
+offset_bottom = 63.0
+grow_horizontal = 0
+text = "Close"

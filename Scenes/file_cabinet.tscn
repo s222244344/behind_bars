@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmg5iqcd8oul7"]
+
+[ext_resource type="Script" uid="uid://dxbv0oaara8ju" path="res://scripts/file_cabinet.gd" id="1_fs24d"]
+[ext_resource type="Texture2D" uid="uid://p6fjm1de5c62" path="res://Free 2D Prison Game Assets By Adarsh S/table2.png" id="1_p2pc2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fs24d"]
+size = Vector2(67.5, 97.5)
+
+[node name="FileCabinet" type="Area2D"]
+script = ExtResource("1_fs24d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(285, 398.625)
+scale = Vector2(0.132812, 0.0892555)
+texture = ExtResource("1_p2pc2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(284.5, 416.5)
+shape = SubResource("RectangleShape2D_fs24d")
